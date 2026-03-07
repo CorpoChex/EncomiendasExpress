@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encomiendas Express | Cotizador Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --azul: #003366; --naranja: #FF8C00; --gris: #F4F7F9; --blanco: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--gris); color: #333; }
+        header { background-color: var(--azul); color: white; padding: 20px; text-align: center; font-weight: 700; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .hero { background: linear-gradient(rgba(0,51,102,0.85), rgba(0,51,102,0.85)), url('https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=1350&q=80'); background-size: cover; padding: 60px 20px; text-align: center; color: white; }
+        .container { max-width: 1100px; margin: -50px auto 40px; display: flex; flex-wrap: wrap; gap: 20px; padding: 0 20px; }
+        .info-section, .cotizador-section { flex: 1; min-width: 320px; background: white; padding: 35px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
+        .cotizador-section { border: 2px solid var(--azul); }
+        h2 { color: var(--azul); margin-top: 0; border-bottom: 2px solid var(--naranja); display: inline-block; padding-bottom: 5px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; color: var(--azul); }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-family: 'Poppins'; background: white; }
+        .medidas-grid { display: flex; gap: 10px; }
+        .vol-display { background: #fff8f0; padding: 10px; border-radius: 8px; border: 1px solid var(--naranja); margin-top: 10px; font-weight: 600; color: #d35400; text-align: center; display: none; font-size: 13px; }
+        .btn-calc { width: 100%; background: var(--azul); color: white; padding: 16px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        .btn-calc:hover { background: #002244; }
+        #resultado-box { margin-top: 25px; padding: 25px; background: #eef2f7; border-radius: 15px; display: none; text-align: center; border: 1px solid #d1d9e6; }
+        .btn-ws { display: flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; text-decoration: none; padding: 16px; border-radius: 10px; font-weight: 700; margin-top: 20px; transition: 0.3s; }
+        .btn-ws:hover { background: #1ebe57; }
+        .legal-note { margin-top: 20px; font-size: 11px; color: #777; line-height: 1.4; border-top: 1px solid #eee; padding-top: 15px; }
+        footer { background: var(--azul); color: white; padding: 30px; text-align: center; margin-top: 40px; font-size: 14px; }
+        .beneficio-item { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 15px; }
+        @media (max-width: 768px) { .container { flex-direction: column; margin-top: 20px; } }
+    </style>
+</head>
+<body>
+
+<header>ENCOMIENDAS EXPRESS</header>
+
+<section class="hero">
+    <h1>Envíos de Guatemala a USA</h1>
+    <p>Calcule su tarifa real y solicite su recolección en línea.</p>
+</section>
+
+<div class="container">
+    <div class="info-section">
+        <h2>¿Por qué elegirnos?</h2>
+        <div class="beneficio-item"><span>✈️</span> <strong>Tránsito Aéreo:</strong> 3 a 5 días hábiles.</div>
+        <div class="beneficio-item"><span>🏠</span> <strong>Puerta a Puerta:</strong> Entregas en todo USA.</div>
+        <div class="beneficio-item"><span>🫔</span> <strong>Especialidad:</strong> Comida típica (con carne) y medicinas.</div>
+        <div class="beneficio-item"><span>🔒</span> <strong>Seguridad:</strong> Trámites de exportación profesionales.</div>
+    </div>
+
+    <div class="cotizador-section">
+        <h2>Cotizador de Envío</h2>
+        
+        <div class="form-group">
+            <label>Estado Destino en USA:</label>
+            <select id="estado">
+                <option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Categoría de Mercadería:</label>
+            <select id="categoria">
+                <option value="doc" data-n="Documentos">Documentos (Q65/lb + Q400)</option>
+                <option value="ropa" data-n="Ropa y Accesorios">Ropa y Accesorios (Q80/lb + Q400)</option>
+                <option value="comidaS" data-n="Comida sin carne">Comida sin carne (Q100/lb + Q400)</option>
+                <option value="comidaC" data-n="Comida con carne">Comida con carne (Q120/lb + Q555)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Peso Real (Libras):</label>
+            <input type="number" id="pesoR" placeholder="Ej: 10">
+        </div>
+
+        <label>Medidas (cm):</label>
+        <div class="medidas-grid">
+            <input type="number" id="L" placeholder="Largo" oninput="calcVol()">
+            <input type="number" id="A" placeholder="Ancho" oninput="calcVol()">
+            <input type="number" id="H" placeholder="Alto" oninput="calcVol()">
+        </div>
+        <div id="vol-msg" class="vol-display"></div>
+
+        <button class="btn-calc" onclick="cotizar()">CALCULAR TOTAL</button>
+
+        <div id="resultado-box">
+            <h3 style="color:var(--azul); margin-top:0;">Total Estimado</h3>
+            <div id="res-total" style="font-size:32px; font-weight:700; color:var(--azul); margin-bottom:10px;"></div>
+            <p id="res-detalle" style="font-size:13px; color:#666; margin-bottom:20px;"></p>
+            
+            <hr style="border:0.5px solid #ccc; margin-bottom:20px;">
+            
+            <div class="form-group">
+                <label>Su Nombre Completo:</label>
+                <input type="text" id="nombreCliente" placeholder="Nombre y Apellido">
+            </div>
+            <div class="form-group">
+                <label>Su Número de Teléfono:</label>
+                <input type="tel" id="telCliente" placeholder="Ej: 55554444">
+            </div>
+
+            <a href="javascript:void(0)" onclick="confirmarEnvio()" class="btn-ws">
+                CONFIRMAR POR WHATSAPP ✅
+            </a>
+        </div>
+
+        <div class="legal-note">
+            * <strong>Aviso Legal:</strong> Esta es una cotización estimada. Pesos reales y volumétricos se aproximan al entero superior. Al recibir el producto, se realizará una medición física final; el costo puede variar si las medidas reales difieren de las ingresadas, pudiera existir pago de impuestos en destino que el cliente será responsable de cancelar.
+        </div>
+    </div>
+</div>
+
+<footer>
+    <strong>ENCOMIENDAS EXPRESS</strong> | WhatsApp: +502 3925 7128<br>
+    © 2026 Todos los derechos reservados.
+</footer>
+
+<script>
+    let datosEnvio = {};
+
+    function calcVol() {
+        const l=parseFloat(document.getElementById('L').value)||0, a=parseFloat(document.getElementById('A').value)||0, h=parseFloat(document.getElementById('H').value)||0;
+        const msg=document.getElementById('vol-msg');
+        if(l>0 && a>0 && h>0){
+            const v = Math.ceil(((l*a*h)/5000)*2.20462);
+            msg.style.display="block"; msg.innerHTML=`Peso Volumétrico aproximado: ${v} lbs`;
+        } else { msg.style.display="none"; }
+    }
+
+    function cotizar() {
+        const pInput=parseFloat(document.getElementById('pesoR').value)||0, l=parseFloat(document.getElementById('L').value)||0, a=parseFloat(document.getElementById('A').value)||0, h=parseFloat(document.getElementById('H').value)||0;
+        const est=document.getElementById('estado').value, sel=document.getElementById('categoria'), cat=sel.value, nCat=sel.options[sel.selectedIndex].getAttribute('data-n');
+        
+        const pR = Math.ceil(pInput);
+        const pV = Math.ceil(((l*a*h)/5000)*2.20462);
+        const pf = Math.max(pR, pV);
+
+        let pl=0, cf=0;
+        if(cat==="doc"){pl=65;cf=400;}else if(cat==="ropa"){pl=80;cf=400;}else if(cat==="comidaS"){pl=100;cf=400;}else if(cat==="comidaC"){pl=120;cf=555;}
+        
+        const total = (pf*pl)+cf;
+
+        datosEnvio = {
+            total: total.toLocaleString('es-GT',{minimumFractionDigits:2}),
+            pFinal: pf,
+            pR: pR,
+            pV: pV,
+            medidas: `${l}x${a}x${h} cm`,
+            destino: est,
+            categoria: nCat
+        };
+
+        document.getElementById('resultado-box').style.display="block";
+        document.getElementById('res-total').innerHTML=`Q${datosEnvio.total}`;
+        document.getElementById('res-detalle').innerHTML=`Cobro basado en ${pf} lbs `;
+        
+        window.scrollTo({ top: document.getElementById('resultado-box').offsetTop - 50, behavior: 'smooth' });
+    }
+
+    function confirmarEnvio() {
+        const nombre = document.getElementById('nombreCliente').value;
+        const tel = document.getElementById('telCliente').value;
+
+        if(!nombre || !tel) {
+            alert("Por favor, ingrese su nombre y teléfono para procesar su cotización.");
+            return;
+        }
+
+        // Codificación segura para WhatsApp
+        const iconUser = "%F0%9F%91%A4"; 
+        const iconTel = "%F0%9F%93%9E";  
+        const iconBox = "%F0%9F%93%A6";  
+        const iconRule = "%F0%9F%93%8F"; 
+        const iconScale = "%E2%9A%96%EF%B8%8F"; 
+        const iconCheck = "%E2%9C%85";   
+
+        const msg = `*ENCOMIENDAS EXPRESS*%0A` +
+                    `${iconCheck} *NUEVA COTIZACIÓN WEB*%0A%0A` +
+                    `${iconUser} *Nombre:* ${nombre}%0A` +
+                    `${iconTel} *Teléfono:* ${tel}%0A%0A` +
+                    `*DATOS DEL ENVÍO:*%0A` +
+                    `--------------------------------%0A` +
+                    `${iconBox} *Categoría:* ${datosEnvio.categoria}%0A` +
+                    `📍 *Destino:* ${datosEnvio.destino}%0A` +
+                    `${iconRule} *Medidas:* ${datosEnvio.medidas}%0A` +
+                    `${iconScale} *Peso Real:* ${datosEnvio.pR} lbs%0A` +
+                    `📐 *Peso Volumétrico:* ${datosEnvio.pV} lbs%0A` +
+                    `--------------------------------%0A` +
+                    `💰 *TOTAL ESTIMADO: Q${datosEnvio.total}*%0A%0A` +
+                    `*Nota:* El cliente está de acuerdo en que el precio final se confirma al medir físicamente el paquete.`;
+
+        window.open(`https://wa.me/50239257128?text=${msg}`, '_blank');
+    }
+</script>
+</body>
+</html>
