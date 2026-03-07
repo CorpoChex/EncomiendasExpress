@@ -62,9 +62,9 @@
             <label>Categoría de Mercadería:</label>
             <select id="categoria">
                 <option value="doc" data-n="Documentos">Documentos (Q65/lb + Q400)</option>
-                <option value="ropa" data-n="Ropa y Accesorios">Ropa y Accesorios (Q80/lb + Q400)</option>
-                <option value="comidaS" data-n="Comida sin carne">Comida sin carne (Q100/lb + Q400)</option>
-                <option value="comidaC" data-n="Comida con carne">Comida con carne (Q120/lb + Q555)</option>
+                <option value="ropa" data-n="Ropa y Accesorios">Ropa, Accesorios etc (Q80/lb + Q400)</option>
+                <option value="comidaS" data-n="Comida sin carne">Comida sin carne / Medicina con receta (Q100/lb + Q400)</option>
+                <option value="comidaC" data-n="Comida con carne">Comida con carne / Medicina sin receta (Q120/lb + Q555)</option>
             </select>
         </div>
 
@@ -157,7 +157,7 @@
         window.scrollTo({ top: document.getElementById('resultado-box').offsetTop - 50, behavior: 'smooth' });
     }
 
-    function confirmarEnvio() {
+    async function confirmarEnvio() {
         const nombre = document.getElementById('nombreCliente').value;
         const tel = document.getElementById('telCliente').value;
 
@@ -165,6 +165,24 @@
             alert("Por favor, ingrese su nombre y teléfono para procesar su cotización.");
             return;
         }
+
+        // --- ENVIAR DATOS A GOOGLE SHEETS ---
+        const datosParaExcel = {
+            nombre: nombre,
+            telefono: tel,
+            destino: datosEnvio.destino,
+            categoria: datosEnvio.categoria,
+            pReal: datosEnvio.pR,
+            medidas: datosEnvio.medidas,
+            pVol: datosEnvio.pV,
+            total: datosEnvio.total
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbzwCQkPqsVdKzoPs3Q2BX5X6QdOeY-sa-SdH4_reyv2gKIUFhbe8DH75YSrj6ASNfxv/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(datosParaExcel)
+        });
 
         // Codificación segura para WhatsApp
         const iconUser = "%F0%9F%91%A4"; 
